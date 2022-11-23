@@ -11,25 +11,32 @@
    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 
-<body>
+<body class="my-bg-secondary">
    <div id="app">
       <div class="container text-center">
-         <h1>To-Vue List</h1>
-         <div class="input-group">
-            <input @keyup.enter="addNewTask()" v-model="newTaskData.text" class="form-control" type="text" id="newTask"
-               placeholder="Insert new task">
-            <button @click="addNewTask()" class="btn btn-success">&plus;</button>
+         <h1 class="text-light my-3">To-Vue List</h1>
+         <div class="d-flex align-items-center">
+            <div class="input-group">
+               <input @keyup.enter="addNewTask()" v-model="newTaskData.text" class="form-control bg" type="text"
+                  id="newTask" placeholder="Insert new task">
+               <button @click="addNewTask()" class="btn btn-success">&plus;</button>
+            </div>
+            <button @click="deleteAll()" class="btn btn-danger ms-3">&LeftArrow;</button>
          </div>
-         <div class="main-container d-flex flex-column align-items-center my-3 gap-3">
-            <div class="task d-flex align-items-center btn-group" v-for="(task, i) in taskList">
-               <label>
-                  <input v-model="task.done" @checked="taskDone()" class="mx-3" type="checkbox" name="" id="">
-                  <span :class="{'text-decoration-line-through': task.done}">{{task.text}}</span>
+
+         <div class="list-container">
+            <div class="task btn-group" v-for="(task, i) in taskList">
+               <label class="text-light">
+                  <input v-model="task.done" @checked="taskDone()" class="mx-2 form-check-input flex-shrink-0"
+                     type="checkbox" name="" id="">
+                  <span :class="{'text-decoration-line-through': task.done,
+               'text-dark' : task.done}">{{task.text}}</span>
                </label>
-               <button @click="removeItem(i)" class="btn btn-danger ms-3">&cross;</button>
+               <button @click="removeItem(i)" class="btn btn-warning ms-3 p-3">&cross;</button>
             </div>
          </div>
       </div>
+   </div>
    </div>
 
    <script src="js/main.js"></script>
